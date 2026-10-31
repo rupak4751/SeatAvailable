@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "dev-only-key")
 
 RESULT_CACHE = {}
-TOKEN_API_URL = "https://railspaapi.shohoz.com/v1.0/web/auth/sign-in"
+TOKEN_API_URL = "https://railspaapi.shohoz.com/v1.0/app/auth/sign-in"
 STATION_NAME_MAPPING = {"Coxs Bazar": "Cox's Bazar"}
 
 with open('config.json', 'r', encoding='utf-8') as config_file:
