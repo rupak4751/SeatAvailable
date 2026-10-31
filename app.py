@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "dev-only-key")
 
 RESULT_CACHE = {}
-TOKEN_API_URL = "https://railspaapi.shohoz.com/v1.0/app/auth/sign-in"
+TOKEN_API_URL = "https://railspaapi.shohoz.com/v1.0/web/auth/sign-in"
 STATION_NAME_MAPPING = {"Coxs Bazar": "Cox's Bazar"}
 
 with open('config.json', 'r', encoding='utf-8') as config_file:
@@ -44,6 +44,8 @@ def fetch_token(phone_number, password):
     while retry_count < max_retries:
         try:
             response = requests.post(TOKEN_API_URL, json=payload)
+            print("SIGNIN STATUS:", response.status_code)
+            print("SIGNIN BODY:", response.text[:500])
             if response.status_code == 422:
                 raise Exception("Mobile Number or Password is incorrect.")
             elif response.status_code >= 500:
