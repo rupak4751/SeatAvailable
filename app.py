@@ -349,6 +349,21 @@ def clear_token():
     response = make_response(redirect(url_for('home')))
     response.delete_cookie('token')
     return response
+#new_added
+@app.route('/use_token', methods=['POST'])
+def use_token():
+    maintenance_response = check_maintenance()
+    if maintenance_response:
+        return maintenance_response
+
+    manual_token = request.form.get('manual_token', '').strip()
+    if not manual_token:
+        session['error'] = "Please paste a valid token."
+        return redirect(url_for('home'))
+
+    response = make_response(redirect(url_for('home')))
+    response.set_cookie('token', manual_token, httponly=True, secure=True, samesite='Lax')
+    return response
 
 @app.errorhandler(404)
 def page_not_found(e):
