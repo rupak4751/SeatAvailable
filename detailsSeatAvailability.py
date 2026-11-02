@@ -97,12 +97,12 @@ def fetch_train_details(config: Dict) -> List[Dict]:
             if response.status_code >= 500:
                 retry_count += 1
                 if retry_count == max_retries:
-                    raise Exception("We’re unable to connect to the Bangladesh Railway website right now. Please try again in a few minutes.")
+                    raise Exception("We're unable to connect to the Bangladesh Railway website right now. Please try again in a few minutes.")
                 continue
             response.raise_for_status()
             train_data = response.json().get("data", {}).get("trains", [])
             return train_data
-            except requests.RequestException as e:
+        except requests.RequestException as e:
             status_code = e.response.status_code if e.response is not None else None
             print("TRIP SEARCH FAILED:", status_code, e.response.text[:300] if e.response is not None else str(e), flush=True)
             return []
