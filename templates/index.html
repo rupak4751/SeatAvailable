@@ -164,6 +164,21 @@
                 </div>
             </div>
         </form>
+<!-- new added -->
+        {% if not token %}
+        <details class="token-paste-section" style="margin-top: 16px;">
+            <summary style="cursor: pointer; font-weight: 600;">Have an auth token already? Paste it here</summary>
+            <form action="/use_token" method="POST" class="inline-form" style="margin-top: 10px;">
+                <div class="input-with-icon">
+                    <i class="fas fa-key input-icon"></i>
+                    <input type="text" name="manual_token" placeholder="Paste your token here" style="width: 100%;">
+                </div>
+                <button type="submit" class="btn-primary" style="margin-top: 10px;">
+                    <i class="fas fa-check"></i> Use This Token
+                </button>
+            </form>
+        </details>
+        {% endif %}
 
         <div id="loader" class="loader"></div>
 
